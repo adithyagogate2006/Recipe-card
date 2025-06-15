@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Veg Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f2f2; margin: 20px; }
+    h1 { text-align: center; }
+
+    select {
+      display: block;
+      margin: 15px auto;
+      padding: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 10px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      background: #f8f8f8;
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .rating {
+      color: orange;
+      font-size: 16px;
+    }
+
+    .toggle {
+      margin-top: 10px;
+      padding: 6px 10px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simple Vegetarian Recipes</h1>
+
+  <select id="filter" onchange="filterCards()">
+    <option value="all">All Cuisines</option>
+    <option value="indian">Indian</option>
+    <option value="italian">Italian</option>
+  </select>
+
+  <div class="cards">
+    <!-- Recipe 1 -->
+    <div class="card" data-cuisine="indian">
+      <h2>Paneer Butter Masala</h2>
+      <img src="https://cdn.mygingergarlickitchen.com/images_webp/675px/675px-restaurant-style-paneer-butter-masala-recipe-1.webp" alt="Paneer Curry">
+      <p><b>Description:</b> A creamy dish with soft paneer cubes simmered in rich tomato-based gravy.</p>
+      <div class="details">
+        <p><b>Ingredients:</b></p>
+        <ul>
+          <li>Paneer</li>
+          <li>Tomatoes</li>
+          <li>Onions</li>
+          <li>Butter, cream, spices</li>
+        </ul>
+        <p><b>Preparation:</b> Make a smooth masala with onion, tomato, spices, and butter. Add paneer and simmer.</p>
+      </div>
+      <p class="rating">Rating: ⭐⭐⭐⭐☆</p>
+      <button class="toggle" onclick="toggleDetails(this)">Show Less</button>
+    </div>
+
+    <!-- Recipe 2 -->
+    <div class="card" data-cuisine="italian">
+      <h2>Veggie Pasta</h2>
+      <img src="https://as1.ftcdn.net/v2/jpg/14/72/81/10/1000_F_1472811095_JvTXtvYwQotINLxTaBCNgvgU4Ir8HcIm.jpg" alt="Veg Pasta">
+      <p><b>Description:</b> Tasty pasta tossed with colorful veggies, herbs, and olive oil.</p>
+      <div class="details">
+        <p><b>Ingredients:</b></p>
+        <ul>
+          <li>Pasta</li>
+          <li>Bell peppers</li>
+          <li>Tomato sauce</li>
+          <li>Oregano, cheese</li>
+        </ul>
+        <p><b>Preparation:</b> Boil pasta, sauté vegetables, add sauce and cheese, mix well.</p>
+      </div>
+      <p class="rating">Rating: ⭐⭐⭐⭐⭐</p>
+      <button class="toggle" onclick="toggleDetails(this)">Show Less</button>
+    </div>
+
+    <!-- Recipe 3 -->
+    <div class="card" data-cuisine="indian">
+      <h2>Vegetable Biryani</h2>
+      <img src="https://as2.ftcdn.net/v2/jpg/09/15/23/01/1000_F_915230169_tYAxBMQv2AWJdjAgEOBgKRUVUnXkFcgX.jpg" alt="Vegetable Biryani">
+      <p><b>Description:</b> Spiced rice dish cooked with mixed vegetables and aromatic herbs.</p>
+      <div class="details">
+        <p><b>Ingredients:</b></p>
+        <ul>
+          <li>Basmati rice</li>
+          <li>Carrot, beans, peas</li>
+          <li>Biryani masala</li>
+          <li>Yogurt, fried onions</li>
+        </ul>
+        <p><b>Preparation:</b> Cook rice and vegetables, layer with masala and yogurt, steam and serve.</p>
+      </div>
+      <p class="rating">Rating: ⭐⭐⭐⭐☆</p>
+      <button class="toggle" onclick="toggleDetails(this)">Show Less</button>
+    </div>
+  </div>
+
+  <script>
+    function filterCards() {
+      const value = document.getElementById('filter').value;
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.display = (value === 'all' || card.dataset.cuisine === value) ? 'block' : 'none';
+      });
+    }
+
+    function toggleDetails(button) {
+      const details = button.previousElementSibling.previousElementSibling;
+      if (details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+        button.textContent = 'Show Less';
+      } else {
+        details.classList.add('hidden');
+        button.textContent = 'Show More';
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+

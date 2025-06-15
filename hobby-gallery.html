@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Veg Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    select {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      width: 300px;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background: #f9f9f9;
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .rating {
+      color: gold;
+      font-size: 18px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .toggle {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pure Veg Recipe Cards</h1>
+
+  <!-- Cuisine Filter -->
+  <select id="filter" onchange="filterCards()">
+    <option value="all">All Cuisines</option>
+    <option value="indian">Indian</option>
+    <option value="italian">Italian</option>
+  </select>
+
+  <div class="cards">
+    <!-- Recipe Card 1 -->
+    <div class="card" data-cuisine="indian">
+      <h2>Vegetable Pulao</h2>
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vegetable Pulao">
+      <p><strong>Description:</strong> Spiced rice with mixed vegetables.</p>
+      <div class="show">
+        <p><strong>Ingredients:</strong></p>
+        <ul>
+          <li>Basmati rice</li>
+          <li>Carrot</li>
+          <li>Peas</li>
+          <li>Spices</li>
+        </ul>
+        <p><strong>Preparation:</strong> Cook vegetables, add rice and spices, simmer until done.</p>
+      </div>
+      <p class="rating">Rating: ⭐⭐⭐⭐☆</p>
+      <button class="toggle" onclick="toggleContent(this)">Show Less</button>
+    </div>
+
+    <!-- Recipe Card 2 -->
+    <div class="card" data-cuisine="italian">
+      <h2>Veggie Pizza</h2>
+      <img src="https://media.istockphoto.com/id/1412292873/photo/vegetable-lover-pizza-with-tomato-onion-chili-powder-garlic-and-black-pepper-isolated-on.jpg?s=1024x1024&w=is&k=20&c=C9WN8praGse7eSpBbI-jQy3E5hdi2NkI7q1fYmsSBTE=" alt="Veggie Pizza">
+      <p><strong>Description:</strong> Crispy pizza topped with fresh vegetables and cheese.</p>
+      <div class="show">
+        <p><strong>Ingredients:</strong></p>
+        <ul>
+          <li>Pizza base</li>
+          <li>Tomato sauce</li>
+          <li>Bell peppers</li>
+          <li>Cheese</li>
+        </ul>
+        <p><strong>Preparation:</strong> Spread sauce, add toppings, bake until golden.</p>
+      </div>
+      <p class="rating">Rating: ⭐⭐⭐⭐⭐</p>
+      <button class="toggle" onclick="toggleContent(this)">Show Less</button>
+    </div>
+  </div>
+
+  <script>
+    function filterCards() {
+      const value = document.getElementById('filter').value;
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (value === 'all' || card.dataset.cuisine === value) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleContent(btn) {
+      const showDiv = btn.previousElementSibling.previousElementSibling;
+      if (showDiv.classList.contains('hidden')) {
+        showDiv.classList.remove('hidden');
+        btn.textContent = 'Show Less';
+      } else {
+        showDiv.classList.add('hidden');
+        btn.textContent = 'Show More';
+      }
+    }
+  </script>
+
+</body>
+</html>
